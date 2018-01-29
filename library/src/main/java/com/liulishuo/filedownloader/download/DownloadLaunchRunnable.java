@@ -263,8 +263,8 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
                     } else {
                         connectionProfile = new ConnectionProfile(
                                 0,
-                                model.getSoFar(),
-                                0,
+                                 model.getSoFar(),
+                                 model.getSoFar(),
                                 model.getTotal() - model.getSoFar()
                         );
                     }
@@ -543,7 +543,8 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
             isChunked = (contentLength == TOTAL_VALUE_IN_CHUNKED_RESOURCE);
             final long totalLength;
             if (!isChunked) {
-                totalLength = model.getSoFar() + contentLength;
+                //totalLength = model.getSoFar() + contentLength;
+                totalLength = FileDownloadUtils.findTotalLength(connection);
             } else {
                 totalLength = contentLength;
             }

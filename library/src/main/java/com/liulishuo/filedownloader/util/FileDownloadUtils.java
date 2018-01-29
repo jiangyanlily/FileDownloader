@@ -526,6 +526,13 @@ public class FileDownloadUtils {
         return newEtag;
     }
 
+    public static long findTotalLength(FileDownloadConnection connection){
+        //Content-Range: bytes 4585081-5248454/5248455
+        String contentRange = connection.getResponseHeaderField("Content-Range");
+        String totalLength = contentRange.split("/")[1];
+        return convertContentLengthString(totalLength);
+    }
+
     public static long findContentLength(final int id, FileDownloadConnection connection) {
         long contentLength = FileDownloadUtils
                 .convertContentLengthString(connection.getResponseHeaderField("Content-Length"));
